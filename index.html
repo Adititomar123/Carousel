@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Carousel | GUI Challenges</title>
+    <meta name="description" content="🤓">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="Canvas">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="./index.css">
+  </head>
+  <body>
+
+    <!--
+      <div class="gui-carousel" aria-label="meaningful carousel title" >
+        <div class="gui-carousel--scroller">
+          <div class="gui-carousel--snap">
+            {your content}
+          </div>
+          <div class="gui-carousel--snap">
+            {your content}
+          </div>
+          ...
+        </div>
+      </div>
+    -->
+
+    <section class="scrollhint">
+      <header>
+        <h2>Scroll Hint</h2>
+        <p>custom CSS</p>
+      </header>
+      <div
+        class="gui-carousel"
+
+        carousel-pagination="dots"
+        carousel-controls="auto"
+        carousel-scrollbar="none"
+        carousel-snapstop="auto"
+        carousel-start="2"
+
+        aria-label="Featured Items Carousel"
+      >
+
+        <div class="gui-carousel--scroller">
+
+          <div class="gui-carousel--snap">
+            <figure class="animate-visibility captioned-image">
+              <img loading="lazy" width="1280" height="720" src="https://picsum.photos/seed/this/1280/720.webp" alt="Blue ocean with a large wave">
+              <figcaption>
+                <a href="#">Learn more about large ocean waves</a>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="gui-carousel--snap">
+            <figure class="animate-visibility captioned-image">
+              <img loading="lazy" width="1280" height="720" src="https://picsum.photos/seed/is/1280/720.webp" alt="Frosty orange desert sunset">
+              <figcaption>
+                <a href="#">Learn more about warm deserts</a>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="gui-carousel--snap">
+            <figure class="animate-visibility captioned-image">
+              <img loading="lazy" width="1280" height="720" src="https://picsum.photos/seed/a/1280/720.webp" alt="African sahara with a giraffe">
+              <figcaption>
+                <a href="#">Learn more about giraffe's</a>
+              </figcaption>
+            </figure>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <script src="./index.js" type="module"></script>
+
+  </body>
+</html>
