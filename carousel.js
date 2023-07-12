@@ -92,17 +92,11 @@ export default class Carousel {
     }
   }
 
-  goToElement({scrollport, element}) {
-    const dir = this.#documentDirection()
-
-    const delta = Math.abs(scrollport.offsetLeft - element.offsetLeft)
-    const scrollerPadding = parseInt(getComputedStyle(scrollport)['padding-left'])
-
-    const pos = scrollport.clientWidth / 2 > delta
-      ? delta - scrollerPadding
-      : delta + scrollerPadding
-
-    scrollport.scrollTo(dir === 'ltr' ? pos : pos*-1, 0)
+  goToElement({ scrollport, element }) {
+    scrollport.scrollTo({
+      left: element.offsetLeft,
+      behavior: 'smooth',
+    });
   }
 
   #updateControls() {
