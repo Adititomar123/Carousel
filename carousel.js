@@ -193,7 +193,7 @@ export default class Carousel {
     // each snap needs some a11y love
     this.elements.snaps.forEach((snapChild, index) => {
       this.hasIntersected.add({
-        isIntersecting: index === 0,
+        isIntersecting: index === startIndex,
         target: snapChild,
       })
 
