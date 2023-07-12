@@ -1,5 +1,3 @@
-import {scrollend} from 'https://cdn.jsdelivr.net/gh/argyleink/scrollyfills@latest/dist/scrollyfills.modern.js'
-
 export default class Carousel {
   constructor(element) {
     this.elements = {
