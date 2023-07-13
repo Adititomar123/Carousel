@@ -15,9 +15,8 @@ export default class Carousel {
     this.elements.root.setAttribute('tabindex', -1)
     this.elements.root.setAttribute('aria-roledescription', 'carousel')
 
-    this.elements.scroller.setAttribute('role', 'group')
+    this.elements.scroller.setAttribute('role', 'presentation')
     this.elements.scroller.setAttribute('aria-label', 'Items Scroller')
-    this.elements.scroller.setAttribute('aria-live', 'Polite')
 
     this.#createObservers() //private method
     this.#createPagination()
