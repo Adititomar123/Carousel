@@ -279,6 +279,7 @@ export default class Carousel {
     let nav = document.createElement('nav')
     nav.className = 'gui-carousel--pagination'
     nav.setAttribute('role', 'tablist')
+    nav.setAttribute('aria-label', 'Select a slide to show')
     this.elements.root.appendChild(nav)
 
     this.elements.pagination = nav
