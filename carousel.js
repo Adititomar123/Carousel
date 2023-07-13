@@ -225,48 +225,49 @@ export default class Carousel {
   }
 
   #handleKeydown(e) {
-    const dir = this.#documentDirection()
-    const idx = this.#getElementIndex(e.target)
+    const idx = this.#getElementIndex(e.target);
 
     switch (e.key) {
       case 'ArrowRight':
-        e.preventDefault()
+        e.preventDefault();
 
-        const next_offset = dir === 'ltr' ? 1 : -1
-        const next_control = dir === 'ltr' ? this.elements.next : this.elements.previous
-
-        if (e.target.closest('.gui-carousel--pagination'))
-          this.elements
-            .pagination.children[idx + next_offset]
-            ?.focus()
-        else {
-          if (document.activeElement === next_control)
-            this.#keypressAnimation(next_control)
-          next_control.focus()
+        if (e.target.closest('.gui-carousel--pagination')) {
+          const nextPagination = this.elements.pagination.children[idx + 1];
+          if (nextPagination) {
+            nextPagination.focus();
+            this.#handlePaginate({ target: nextPagination });
+          }
+        } else {
+          const nextControl = this.elements.next;
+          if (document.activeElement === nextControl) {
+            this.#keypressAnimation(nextControl);
+          }
+          nextControl.focus();
+          this.goNext();
         }
+        break;
 
-        dir === 'ltr' ? this.goNext() : this.goPrevious()
-        break
       case 'ArrowLeft':
-        e.preventDefault()
+        e.preventDefault();
 
-        const previous_offset = dir === 'ltr' ? -1 : 1
-        const previous_control = dir === 'ltr' ? this.elements.previous : this.elements.next
-
-        if (e.target.closest('.gui-carousel--pagination'))
-          this.elements
-            .pagination.children[idx + previous_offset]
-            ?.focus()
-        else {
-          if (document.activeElement === previous_control)
-            this.#keypressAnimation(previous_control)
-          previous_control.focus()
+        if (e.target.closest('.gui-carousel--pagination')) {
+          const previousPagination = this.elements.pagination.children[idx - 1];
+          if (previousPagination) {
+            previousPagination.focus();
+            this.#handlePaginate({ target: previousPagination });
+          }
+        } else {
+          const previousControl = this.elements.previous;
+          if (document.activeElement === previousControl) {
+            this.#keypressAnimation(previousControl);
+          }
+          previousControl.focus();
+          this.goPrevious();
         }
-
-        dir === 'ltr' ? this.goPrevious() : this.goNext()
-        break
+        break;
     }
-  }
+}
+
 
   #getElementIndex(element) {
     let index = 0
@@ -372,10 +373,6 @@ export default class Carousel {
     element.addEventListener('animationend', e => {
       element.style.animation = null
     }, {once: true})
-  }
-
-  #documentDirection() {
-    return document.firstElementChild.getAttribute('dir') || 'ltr'
   }
 }
 
