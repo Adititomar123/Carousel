@@ -43,10 +43,6 @@ export default class Carousel {
       // stash the intersecting snap element
       if (observation.isIntersecting) {
         this.current = observation.target
-        this.goToElement({
-          scrollport: this.elements.pagination,
-          element: dot,
-        })
       }
     }
 
