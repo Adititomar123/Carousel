@@ -106,7 +106,9 @@ export default class Carousel {
       this.elements.next.focus()
 
     this.elements.next.toggleAttribute('disabled', isAtEnd)
+    this.elements.next.setAttribute('aria-hidden', isAtEnd)
     this.elements.previous.toggleAttribute('disabled', isAtStart)
+    this.elements.previous.setAttribute('aria-hidden', isAtStart)
   }
 
   #listen() {
