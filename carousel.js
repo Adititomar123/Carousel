@@ -7,6 +7,7 @@ export default class Carousel {
       previous:   null, // generated in #createControl
       next:       null, // generated in #createControl
       pagination: null, // generated in #createPagination
+      liveregion: null,
     }
 
     this.current = undefined        // set in #initializeState
@@ -19,12 +20,31 @@ export default class Carousel {
     this.elements.scroller.setAttribute('aria-label', 'Items Scroller')
 
     this.#createObservers() //private method
-    this.#createPagination()
     this.#createControls()
+    this.#createPagination()
     this.#initializeState()
     this.#listen()
     this.#synchronize()
+    this.#liveRegion()
   }
+
+  #liveRegion() {
+    // Add a live region to announce the slide number when using the previous/next buttons
+    let result = document.createElement('div');
+    result.setAttribute('aria-live', 'polite');
+    result.setAttribute('aria-atomic', 'true');
+   result.setAttribute('class', 'liveregion visuallyhidden');
+    this.elements.root.appendChild(result);
+    this.liveregion = result;
+  }
+  #announceSlide() {
+  const currentSlideIndex = Array.from(this.elements.snaps).indexOf(this.current);
+  const slideNumber = currentSlideIndex + 1;
+  const totalSlides = this.elements.snaps.length;
+
+
+  this.liveregion.textContent = `Slide ${slideNumber} of ${totalSlides}`;
+}
 
   #synchronize() {
     for (let observation of this.hasIntersected) {
@@ -61,6 +81,7 @@ export default class Carousel {
         element: next,
       })
       this.current = next
+      this.#announceSlide();
     }
     else {
       console.log('at the end')
@@ -79,6 +100,7 @@ export default class Carousel {
         element: previous,
       })
       this.current = previous
+      this.#announceSlide();
     }
     else {
       console.log('at the beginning')
@@ -326,18 +348,13 @@ export default class Carousel {
   }
 
   #createControls() {
-    let controls = document.createElement('div')
-    controls.className = 'gui-carousel--controls'
-
     let prevBtn = this.#createControl('previous')
     let nextBtn = this.#createControl('next')
 
-    controls.appendChild(prevBtn)
-    controls.appendChild(nextBtn)
-
     this.elements.previous = prevBtn
     this.elements.next = nextBtn
-    this.elements.root.prepend(controls)
+    this.elements.root.prepend(prevBtn)
+    this.elements.root.appendChild(nextBtn)
   }
 
   #createControl(btnType) {
