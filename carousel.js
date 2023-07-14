@@ -303,8 +303,7 @@ export default class Carousel {
     marker.className = 'gui-carousel--control'
     marker.type = 'button'
     marker.role = 'tab'
-    marker.title = `Item ${index}: ${img?.alt || caption?.innerText}`
-    marker.setAttribute('aria-label', img?.alt || caption?.innerText)
+    marker.setAttribute('aria-label', `Item ${index} ${img?.alt || caption?.innerText}`)
     marker.setAttribute('aria-setsize', this.elements.snaps.length)
     marker.setAttribute('aria-posinset', index)
     return marker
