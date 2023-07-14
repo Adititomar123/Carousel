@@ -1,5 +1,5 @@
-/* 
-TODO: 
+/*
+TODO:
 - option for cyclical cycling
 
 NICE TO HAVE:
@@ -12,17 +12,53 @@ NICE TO HAVE:
   - async initialization
 - js api
 */
+:root {
+  --motionOK: (prefers-reduced-motion: no-preference);
+  --OSdark: (prefers-color-scheme: dark);
+  --OSlight: (prefers-color-scheme: light);
+   --size-000: -.5rem;
+  --size-00: -.25rem;
+  --size-1: .25rem;
+  --size-2: .5rem;
+  --size-3: 1rem;
+  --size-4: 1.25rem;
+  --size-5: 1.5rem;
+  --size-6: 1.75rem;
+  --size-7: 2rem;
+  --size-8: 3rem;
+  --size-9: 4rem;
+  --size-10: 5rem;
+  --ease-1: cubic-bezier(.25,0,.5,1);
+  --ease-2: cubic-bezier(.25,0,.4,1);
+  --ease-3: cubic-bezier(.25,0,.3,1);
+  --ease-4: cubic-bezier(.25,0,.2,1);
+  --ease-5: cubic-bezier(.25,0,.1,1);
+  --ease-in-1: cubic-bezier(.25,0,1,1);
+  --ease-in-2: cubic-bezier(.50,0,1,1);
+  --ease-in-3: cubic-bezier(.70,0,1,1);
+  --ease-in-4: cubic-bezier(.90,0,1,1);
+  --ease-in-5: cubic-bezier(1,0,1,1);
+  --ease-squish-3: cubic-bezier(.5,-.5,.1,1.5);
+  --border-size-1: 1px;
+  --gray-1: #f8f9fa;
+  --gray-2: #e9ecef;
+  --gray-3: #dee2e6;
+  --gray-4: #ced4da;
+  --gray-7: #495057;
+  --size-fluid-5: clamp(4rem,5vw,5rem);
+  --link: #15717d;
+}
 
 :where(.gui-carousel) {
   --_carousel-item-size: 80%;
   --_carousel-gutters: max(4rem, calc((100% - var(--_carousel-item-size)) / 2));
   --_carousel-scrollbar-gutter: var(--size-6);
   --_carousel-pagination-size: var(--size-8);
-  
+
   display: grid;
   grid-template-columns: [carousel-gutter] var(--_carousel-gutters) 1fr [carousel-gutter] var(--_carousel-gutters);
-  grid-template-rows: 
-    [carousel-scroller] 1fr 
+  grid-template-rows:
+    [carousel-scroller] 1fr
     [carousel-pagination] var(--_carousel-pagination-size);
 
   &:focus-visible {
@@ -78,13 +114,13 @@ NICE TO HAVE:
 :where(.gui-carousel--scroller) {
   grid-row: 1;
   grid-column: 1/-1;
-  
+
   display: grid;
   grid-auto-columns: 100%;
   grid-auto-flow: column;
   align-items: center;
   gap: var(--_carousel-gutters);
-  
+
   padding-block: var(--size-2) var(--_carousel-scrollbar-gutter);
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -124,22 +160,22 @@ NICE TO HAVE:
 
   grid-row: 1;
   place-self: center;
-  background: var(--surface-1);
-  color: var(--text-2);
+  background: var(--gray-1);
+  color: var(--gray-7);
   inline-size: var(--size-8);
-  aspect-ratio: var(--ratio-square);
-  border-radius: var(--radius-round);
+  aspect-ratio: 1;
+  border-radius: 15px;
   box-shadow: 0 0 0 var(--_shadow-size) var(--_shadow-highlight);
   border: var(--border-size-1) solid transparent;
   text-indent: 10ch;
   padding: 0;
   overflow: hidden;
-  z-index: var(--layer-1);
+  z-index: 1;
   transition: opacity .5s var(--ease-2) .5s;
 
   @media (--motionOK) {
-    transition: 
-      opacity .5s var(--ease-2) .5s, 
+    transition:
+      opacity .5s var(--ease-2) .5s,
       transform .2s var(--ease-4),
       box-shadow .2s var(--ease-4),
       outline-offset 145ms var(--ease-2)
@@ -201,7 +237,7 @@ NICE TO HAVE:
 :where(.gui-carousel--pagination) {
   grid-column: 1/-1;
   place-self: center;
-  
+
   display: grid;
   grid-auto-flow: column;
   gap: var(--size-2);
@@ -237,17 +273,34 @@ NICE TO HAVE:
 
   & > button {
     inline-size: var(--size-3);
-    background-color: var(--surface-4);
+    background-color: var(--gray-4);
     border: var(--border-size-1) solid transparent;
 
     &.--gallery {
       inline-size: var(--size-fluid-5);
-      border-radius: var(--radius-2);
+      border-radius: 15px;
       border: none;
       background-origin: border-box;
       background-size: cover;
     }
   }
+}
+
+/* custom css */
+.gui-carousel--control.--previous, .gui-carousel--control.--next {
+    background: #d5d1ce;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+        border-radius: 50%;
+            z-index: 1;
+}
+.gui-carousel--control.--previous svg, .gui-carousel--control.--next svg {
+      height: 30px;
+    width: 30px;
 }
 
 @keyframes gui-carousel--control-keypress {

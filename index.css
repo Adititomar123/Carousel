@@ -1,7 +1,4 @@
-@layer base, library, carousel, carousel-custom;
-
-@import "open-props/style" layer(base);
-@import "open-props/normalize" layer(library);
+@layer carousel, carousel-custom;
 
 @import "carousel.css" layer(carousel);
 @import "custom-carousel-items.css" layer(carousel-custom);

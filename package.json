@@ -10,7 +10,6 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "open-props": "^1.4.14",
     "postcss": "^8.4.16",
     "postcss-custom-media": "^8.0.2",
     "postcss-preset-env": "7.8.0",
