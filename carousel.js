@@ -263,9 +263,6 @@ export default class Carousel {
           }
         } else {
           const nextControl = this.elements.next;
-          if (document.activeElement === nextControl) {
-            this.#keypressAnimation(nextControl);
-          }
           nextControl.focus();
           this.goNext();
         }
@@ -282,9 +279,6 @@ export default class Carousel {
           }
         } else {
           const previousControl = this.elements.previous;
-          if (document.activeElement === previousControl) {
-            this.#keypressAnimation(previousControl);
-          }
           previousControl.focus();
           this.goPrevious();
         }
@@ -384,13 +378,6 @@ export default class Carousel {
     control.appendChild(svg)
 
     return control
-  }
-
-  #keypressAnimation(element) {
-    element.style.animation = 'gui-carousel--control-keypress 145ms var(--ease-2)'
-    element.addEventListener('animationend', e => {
-      element.style.animation = null
-    }, {once: true})
   }
 }
 
