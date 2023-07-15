@@ -120,17 +120,8 @@ export default class Carousel {
     const isAtEnd   = this.current === last
     const isAtStart = this.current === first
 
-    // before we possibly disable a button
-    // shift the focus to the complimentary button
-    if (document.activeElement === this.elements.next && isAtEnd)
-      this.elements.previous.focus()
-    else if (document.activeElement === this.elements.previous && isAtStart)
-      this.elements.next.focus()
-
     this.elements.next.toggleAttribute('disabled', isAtEnd)
-    this.elements.next.setAttribute('aria-hidden', isAtEnd)
     this.elements.previous.toggleAttribute('disabled', isAtStart)
-    this.elements.previous.setAttribute('aria-hidden', isAtStart)
   }
 
   #listen() {
