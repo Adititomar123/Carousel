@@ -265,6 +265,12 @@ NICE TO HAVE:
 
   & > [aria-selected="true"] {
     background: var(--link);
+
+  }
+
+  & > [aria-selected="true"]:focus-visible {
+    outline: 0.1rem solid var(--link);
+    outline-offset: 0.1rem;
   }
 
   & > [aria-selected="false"] {
