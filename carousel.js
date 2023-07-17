@@ -122,12 +122,6 @@ export default class Carousel {
     for (let item of this.elements.snaps)
       this.carousel_observer.observe(item)
 
-    // watch document for removal of this carousel node
-    this.mutation_observer.observe(document, {
-      childList: true,
-      subtree: true,
-    })
-
     // scrollend listener for sync
     this.elements.scroller.addEventListener('scrollend', this.#synchronize.bind(this))
     this.elements.next.addEventListener('click', this.goNext.bind(this))
@@ -139,8 +133,6 @@ export default class Carousel {
   #unlisten() {
     for (let item of this.elements.snaps)
       this.carousel_observer.unobserve(item)
-
-    this.mutation_observer.disconnect()
 
     this.elements.scroller.removeEventListener('scrollend', this.#synchronize)
     this.elements.next.removeEventListener('click', this.goNext)
@@ -163,17 +155,6 @@ export default class Carousel {
       threshold: .6,
     })
 
-    this.mutation_observer = new MutationObserver((mutationList, observer) => {
-      mutationList
-        .filter(x => x.removedNodes.length > 0)
-        .forEach(mutation => {
-          [...mutation.removedNodes]
-            .filter(x => x.querySelector('.gui-carousel') === this.elements.root)
-            .forEach(removedEl => {
-              this.#unlisten()
-            })
-        })
-    })
   }
 
   #initializeState() {
