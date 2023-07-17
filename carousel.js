@@ -17,7 +17,6 @@ export default class Carousel {
     this.elements.root.setAttribute('aria-roledescription', 'carousel')
 
     this.elements.scroller.setAttribute('role', 'presentation')
-    this.elements.scroller.setAttribute('aria-label', 'Items Scroller')
 
     this.#createObservers() //private method
     this.#createControls()
