@@ -71,9 +71,6 @@ export default class Carousel {
   goNext() {
     const next = this.current.nextElementSibling
 
-    if (this.current === next)
-      return
-
     if (next) {
       this.goToElement({
         scrollport: this.elements.scroller,
@@ -89,9 +86,6 @@ export default class Carousel {
 
   goPrevious() {
     const previous = this.current.previousElementSibling
-
-    if (this.current === previous)
-      return
 
     if (previous) {
       this.goToElement({
