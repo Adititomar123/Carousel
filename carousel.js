@@ -23,7 +23,6 @@ export default class Carousel {
     this.#createPagination()
     this.#initializeState()
     this.#listen()
-    this.#synchronize()
     this.#liveRegion()
   }
 
@@ -123,7 +122,6 @@ export default class Carousel {
       this.carousel_observer.observe(item)
 
     // scrollend listener for sync
-    this.elements.scroller.addEventListener('scrollend', this.#synchronize.bind(this))
     this.elements.next.addEventListener('click', this.goNext.bind(this))
     this.elements.previous.addEventListener('click', this.goPrevious.bind(this))
     this.elements.pagination.addEventListener('click', this.#handlePaginate.bind(this))
@@ -134,7 +132,6 @@ export default class Carousel {
     for (let item of this.elements.snaps)
       this.carousel_observer.unobserve(item)
 
-    this.elements.scroller.removeEventListener('scrollend', this.#synchronize)
     this.elements.next.removeEventListener('click', this.goNext)
     this.elements.previous.removeEventListener('click', this.goPrevious)
     this.elements.pagination.removeEventListener('click', this.#handlePaginate)
@@ -150,6 +147,10 @@ export default class Carousel {
         observation.target.classList
           .toggle('--in-view', observation.isIntersecting)
       }
+
+      requestAnimationFrame(() => {
+        this.#synchronize();
+      });
     }, {
       root: this.elements.scroller,
       threshold: .6,
