@@ -32,18 +32,18 @@ export default class Carousel {
     let result = document.createElement('div');
     result.setAttribute('aria-live', 'polite');
     result.setAttribute('aria-atomic', 'true');
-   result.setAttribute('class', 'liveregion visuallyhidden');
+    result.setAttribute('class', 'liveregion visuallyhidden');
     this.elements.root.appendChild(result);
     this.liveregion = result;
   }
+
   #announceSlide() {
-  const currentSlideIndex = Array.from(this.elements.snaps).indexOf(this.current);
-  const slideNumber = currentSlideIndex + 1;
-  const totalSlides = this.elements.snaps.length;
+    const currentSlideIndex = Array.from(this.elements.snaps).indexOf(this.current);
+    const slideNumber = currentSlideIndex + 1;
+    const totalSlides = this.elements.snaps.length;
 
-
-  this.liveregion.textContent = `Slide ${slideNumber} of ${totalSlides}`;
-}
+    this.liveregion.textContent = `Slide ${slideNumber} of ${totalSlides}`;
+  }
 
   #synchronize() {
     for (let observation of this.hasIntersected) {
@@ -168,10 +168,6 @@ export default class Carousel {
     // each snap target needs a marker for pagination
     // each snap needs some a11y love
     this.elements.snaps.forEach((snapChild, index) => {
-      this.hasIntersected.add({
-        isIntersecting: index === startIndex,
-        target: snapChild,
-      })
 
       this.elements.pagination
         .appendChild(this.#createMarker(snapChild, index))
