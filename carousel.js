@@ -148,9 +148,7 @@ export default class Carousel {
           .toggle('--in-view', observation.isIntersecting)
       }
 
-      requestAnimationFrame(() => {
-        this.#synchronize();
-      });
+    this.#synchronize();
     }, {
       root: this.elements.scroller,
       threshold: .6,
